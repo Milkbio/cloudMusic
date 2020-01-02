@@ -10,3 +10,7 @@
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
 
+## 云开发
+- 云开发环境名称 cloud-music-dev
+- 云开发环境ID cloud-music-dev-daq3z
+
