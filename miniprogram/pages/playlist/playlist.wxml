@@ -1,2 +1,11 @@
-<!--pages/playlist/playlist.wxml-->
-<text>pages/playlist/playlist.wxml</text>
+<swiper>
+  <swiper-item wx:for="{{swiperImgUrls}}" indicator-dots wx:key="index">
+    <image src="{{item.url}}" class="img"></image>
+  </swiper-item>
+</swiper>
+
+<view class="playlist-container">
+  <block wx:for="{{playlist}}" wx:key="_id">
+    <x-playitem playItem="{{item}}"></x-playitem>
+  </block>
+</view>
