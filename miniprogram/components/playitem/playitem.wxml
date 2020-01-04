@@ -1,0 +1,5 @@
+<view class="play-item">
+  <image class="img" src="{{playItem.picUrl}}"></image>
+  <text class="play-count">{{count}}</text>
+  <view class="name">{{playItem.name}}</view>
+</view>
