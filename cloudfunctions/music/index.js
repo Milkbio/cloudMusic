@@ -22,6 +22,7 @@ exports.main = async(event, context) => {
       .orderBy('createTime', 'desc')
       .get()
       .then((res) => {
+        console.log(res)
         return res
       })
   })
