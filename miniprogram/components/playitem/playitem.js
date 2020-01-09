@@ -26,6 +26,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    gotoMusicList() {
+      const {id} = this.properties.playItem
+      wx.navigateTo({
+        url: `/pages/musiclist/musiclist?playlistId=${id}`
+      })
+    },
     formatCount(count) {
       const unitArr = ['', '万', '亿']
       let index = 0

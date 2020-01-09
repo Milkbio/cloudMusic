@@ -29,8 +29,10 @@ exports.main = async(event, context) => {
 
   app.router('musiclist', async(ctx, next) => {
     ctx.body = await rp(BASE_URL + '/playlist/detail?id=' + parseInt(event.playlistId))
-      .then((res) => {
+      .then(res => {
         return JSON.parse(res)
+      }).catch(err => {
+        return JSON.parse(err)
       })
   })
 

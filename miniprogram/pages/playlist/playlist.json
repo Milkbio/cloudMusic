@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "x-playitem": "/components/playitem/playitem"
-  }
+  },
+  "enablePullDownRefresh": true
 }
