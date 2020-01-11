@@ -12,7 +12,7 @@
 
 .musiclist-info {
   flex-grow: 1;
-  /*width: 0;*/
+  width: 0;
 }
 
 .musiclist-name {
