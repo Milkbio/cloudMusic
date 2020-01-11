@@ -73,12 +73,17 @@
     transform: rotate(360deg);
   }
 }
-
-
+.progress-bar {
+  width: 90%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 240rpx;
+}
 .control {
   position: absolute;
   width: 100%;
-  bottom: 160rpx;
+  bottom: 100rpx;
   color: #fefefe;
   display: flex;
   align-items: center;
@@ -91,3 +96,4 @@
 .control .icon-bofang, .control .icon-pause {
   font-size: 120rpx;
 }
+

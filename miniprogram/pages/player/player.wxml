@@ -8,7 +8,10 @@
 
 
   <!--进度条-->
-  <x-progressbar/>
+  <view class="progress-bar">
+    <x-progressbar/>
+  </view>
+
 
   <!--控制面板-->
   <view class="control">
