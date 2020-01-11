@@ -67,3 +67,18 @@
     transform: rotate(360deg);
   }
 }
+
+
+.control {
+  position: absolute;
+  width: 100%;
+  bottom: 160rpx;
+  color: #fefefe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.control .iconfont {
+  font-size: 80rpx;
+  margin: 0 40rpx;
+}
