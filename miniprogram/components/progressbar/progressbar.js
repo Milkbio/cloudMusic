@@ -91,6 +91,22 @@ Component({
         }
       })
     },
+    // 进度条change事件
+    onChange(e) {
+      if (e.detail.source === 'touch') {
+        this.data.offsetX = e.detail.x
+        this.data.percent = e.detail.x / (movableAreaWidth - movableViewWidth) * 100
+      }
+    },
+    onTouchEnd() {
+      this.setData({
+        offsetX: this.data.offsetX,
+        percent: this.data.percent,
+        ['showTime.currentTime']: this.formatTime(backgroundAudioManager.currentTime)
+      })
+      backgroundAudioManager.seek(this.data.percent * backgroundAudioManager.duration / 100)
+    },
+    // 进度条停止触屏事件
     // 设置总时间
     setTotalTime() {
       // console.log(backgroundAudioManager.duration)
