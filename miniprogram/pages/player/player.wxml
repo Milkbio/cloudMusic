@@ -9,7 +9,7 @@
 
   <!--进度条-->
   <view class="progress-bar">
-    <x-progressbar/>
+    <x-progressbar bind:musicEnd="next"/>
   </view>
 
 

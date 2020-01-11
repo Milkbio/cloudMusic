@@ -2,6 +2,8 @@ let movableAreaWidth = 0, movableViewWidth = 0
 
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 
+let isOnChanging = false // 解决onchange与backgroundAudioManager.onTimeUpdate事件冲突的问题
+
 Component({
   /**
    * 组件的属性列表
@@ -53,47 +55,35 @@ Component({
         }
       })
       backgroundAudioManager.onEnded(() => {
-
-      })
-      backgroundAudioManager.onError(() => {
-
-      })
-      backgroundAudioManager.onNext(() => {
-
-      })
-      backgroundAudioManager.onPause(() => {
-
+        this.triggerEvent('musicEnd')
       })
       backgroundAudioManager.onPlay(() => {
-
-      })
-      backgroundAudioManager.onPrev(() => {
-
-      })
-      backgroundAudioManager.onStop(() => {
-
+        isOnChanging = false
       })
       backgroundAudioManager.onTimeUpdate(() => {
-        // console.log(backgroundAudioManager.currentTime)
-        const currentTime = backgroundAudioManager.currentTime
-        const totalTime = backgroundAudioManager.duration
-        // 获取播放时间格式化后秒数
-        const second = Math.floor(currentTime % 60)
-        // 获取showTime.currentTime中的秒数，如果与上面的second相等，代表在同一秒，就不需要setData，
-        // 以防过多的setData影响性能
-        const time = Number(this.data.showTime.currentTime.substring(3))
-        if (time !== second) {
-          this.setData({
-            ['showTime.currentTime']: this.formatTime(currentTime),
-            offsetX: (movableAreaWidth - movableViewWidth) * currentTime / totalTime,
-            percent: currentTime / totalTime * 100
-          })
+        if (!isOnChanging) {
+          // console.log(backgroundAudioManager.currentTime)
+          const currentTime = backgroundAudioManager.currentTime
+          const totalTime = backgroundAudioManager.duration
+          // 获取播放时间格式化后秒数
+          const second = Math.floor(currentTime % 60)
+          // 获取showTime.currentTime中的秒数，如果与上面的second相等，代表在同一秒，就不需要setData，
+          // 以防过多的setData影响性能
+          const time = Number(this.data.showTime.currentTime.substring(3))
+          if (time !== second) {
+            this.setData({
+              ['showTime.currentTime']: this.formatTime(currentTime),
+              offsetX: (movableAreaWidth - movableViewWidth) * currentTime / totalTime,
+              percent: currentTime / totalTime * 100
+            })
+          }
         }
       })
     },
     // 进度条change事件
     onChange(e) {
       if (e.detail.source === 'touch') {
+        isOnChanging = true
         this.data.offsetX = e.detail.x
         this.data.percent = e.detail.x / (movableAreaWidth - movableViewWidth) * 100
       }
@@ -105,6 +95,7 @@ Component({
         ['showTime.currentTime']: this.formatTime(backgroundAudioManager.currentTime)
       })
       backgroundAudioManager.seek(this.data.percent * backgroundAudioManager.duration / 100)
+      isOnChanging = false
     },
     // 进度条停止触屏事件
     // 设置总时间
