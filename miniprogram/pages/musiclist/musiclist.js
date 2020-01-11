@@ -1,11 +1,11 @@
-// miniprogram/pages/musiclist/musiclist.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    musicList: [],
+    listInfo: {}
   },
 
   /**
@@ -13,6 +13,9 @@ Page({
    */
   onLoad: function (options) {
     const {playlistId} = options
+    wx.showLoading({
+      title: 'loading...'
+    })
     wx.cloud.callFunction({
       name: 'music',
       data: {
@@ -20,7 +23,14 @@ Page({
         $url: 'musiclist'
       }
     }).then(res => {
-      console.log(res)
+      const {tracks, coverImgUrl, name} = res.result.playlist
+      this.setData({
+        musicList: tracks,
+        listInfo: {
+           coverImgUrl, name
+        }
+      })
+      wx.hideLoading()
     })
   },
 
