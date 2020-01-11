@@ -1,20 +1,32 @@
-// miniprogram/pages/player/player.js
+let musicList = []
+let nowPlayingIndex = -1 // 正在播放歌曲的index值
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    picUrl: ''
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options.musicid)
+    nowPlayingIndex = options.index
+    musicList = wx.getStorageSync('musicList')
+    this.loadMusicDetail()
   },
-
+  loadMusicDetail() {
+    let music = musicList[nowPlayingIndex]
+    wx.setNavigationBarTitle({
+      title: music.name,
+    })
+    this.setData({
+      picUrl: music.al.picUrl
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

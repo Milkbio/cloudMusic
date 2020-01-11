@@ -42,7 +42,7 @@
 					"id": 0,
 					"name": "pages/player/player",
 					"pathName": "pages/player/player",
-					"query": "musicid= 395599",
+					"query": "musicid= 395599&index=2",
 					"scene": null
 				}
 			]
