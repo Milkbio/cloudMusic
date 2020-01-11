@@ -1,5 +1,6 @@
 let musicList = []
 let nowPlayingIndex = -1 // 正在播放歌曲的index值
+const backgroundAudioManager = wx.getBackgroundAudioManager()
 
 Page({
 
@@ -7,25 +8,71 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picUrl: ''
+    picUrl: '',
+    isPlaying: false
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.musicid)
     nowPlayingIndex = options.index
     musicList = wx.getStorageSync('musicList')
-    this.loadMusicDetail()
+    this.loadMusicDetail(options.musicId)
   },
-  loadMusicDetail() {
+
+  loadMusicDetail(musicId) {
+    backgroundAudioManager.stop()
     let music = musicList[nowPlayingIndex]
+    wx.showLoading({
+      title: 'loading...'
+    })
     wx.setNavigationBarTitle({
       title: music.name,
     })
     this.setData({
-      picUrl: music.al.picUrl
+      picUrl: music.al.picUrl,
+      isPlaying: false
     })
+
+    // 查询当前musicId的音乐url
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        musicId,
+        $url: 'musicUrl'
+      }
+    }).then(res => {
+      let {url} = JSON.parse(res.result).data[0]
+      backgroundAudioManager.src = url
+      backgroundAudioManager.title = music.name
+      backgroundAudioManager.coverImgUrl = music.al.picUrl
+      backgroundAudioManager.singer = music.al.name
+
+      this.setData({
+        isPlaying: true
+      })
+      wx.hideLoading()
+    })
+  },
+  togglePlaying() {
+    this.setData({
+      isPlaying: backgroundAudioManager.paused
+    })
+    backgroundAudioManager.paused ? backgroundAudioManager.play() : backgroundAudioManager.pause()
+  },
+  prev() {
+    nowPlayingIndex--
+    if (nowPlayingIndex < 0) {
+      nowPlayingIndex = musicList.length - 1
+    }
+    this.loadMusicDetail(musicList[nowPlayingIndex].id)
+  },
+  next() {
+    nowPlayingIndex++
+    if (nowPlayingIndex > musicList.length - 1) {
+      nowPlayingIndex = 0
+    }
+    this.loadMusicDetail(musicList[nowPlayingIndex].id)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

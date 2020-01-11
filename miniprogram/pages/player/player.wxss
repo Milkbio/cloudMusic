@@ -46,6 +46,9 @@
   transform-origin: 24rpx 10rpx;
   transition: transform 0.5s ease;
 }
+.player-disc.playing:after {
+  transform: rotate(0);
+}
 .player-img {
   width: 368rpx;
   height: 368rpx;
@@ -57,7 +60,10 @@
   margin-left: -184rpx;
 }
 .player-img.playing {
-  animation: rotate linear 8s infinite;
+  animation: rotate linear 12s infinite;
+}
+.player-img.paused {
+  animation-play-state: paused;
 }
 @keyframes rotate {
   from {
@@ -80,5 +86,8 @@
 }
 .control .iconfont {
   font-size: 80rpx;
-  margin: 0 40rpx;
+  margin: 0 50rpx;
+}
+.control .icon-bofang, .control .icon-pause {
+  font-size: 120rpx;
 }
