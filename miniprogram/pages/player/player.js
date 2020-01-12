@@ -9,7 +9,9 @@ Page({
    */
   data: {
     picUrl: '',
-    isPlaying: false
+    isPlaying: false,
+    isShowLrc: false, // 当前歌词是否显示
+    lyric: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -52,6 +54,24 @@ Page({
         isPlaying: true
       })
       wx.hideLoading()
+
+      // 查询当前musicId的歌词
+      wx.cloud.callFunction({
+        name: 'music',
+        data: {
+          musicId,
+          $url: 'lyric'
+        }
+      }).then(res => {
+        let lyric = '暂无歌词'
+        const {lrc} = JSON.parse(res.result)
+        if (lrc) {
+          lyric = lrc.lyric
+          this.setData({
+            lyric
+          })
+        }
+      })
     })
   },
   togglePlaying() {
@@ -73,6 +93,11 @@ Page({
       nowPlayingIndex = 0
     }
     this.loadMusicDetail(musicList[nowPlayingIndex].id)
+  },
+  handleShowLrc() {
+    this.setData({
+      isShowLrc: !this.data.isShowLrc
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -1,0 +1,7 @@
+<scroll-view hidden="{{!isShowLrc}}" class="lyric-scroll">
+  <view class="lyric-panel">
+    <view wx:for="{{lyricList}}" wx:key="index" class="lyric">
+      {{item.lrc}}
+    </view>
+  </view>
+</scroll-view>
