@@ -15,6 +15,14 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+      playingMusicId: -1
+    }
+  },
+  setPlayMusicId(id) {
+    this.globalData.playingMusicId = id
+  },
+  getPlayMusicId() {
+    return this.globalData.playingMusicId
   }
 })

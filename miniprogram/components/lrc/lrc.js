@@ -77,7 +77,7 @@ Component({
     update(currentTime) {
       const {lyricList} = this.data
       if (lyricList.length > 0) {
-        console.log(currentTime)
+        // console.log(currentTime)
         let len = lyricList.length
         // 解决如果当前播放时间大于歌曲的最后一句歌词的时间不滚动的问题
         if (currentTime > lyricList[len - 1].time) {

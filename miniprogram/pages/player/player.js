@@ -1,6 +1,7 @@
 let musicList = []
 let nowPlayingIndex = -1 // 正在播放歌曲的index值
 const backgroundAudioManager = wx.getBackgroundAudioManager()
+const app = getApp()
 
 Page({
 
@@ -35,6 +36,8 @@ Page({
       picUrl: music.al.picUrl,
       isPlaying: false
     })
+
+    app.setPlayMusicId(musicId)
 
     // 查询当前musicId的音乐url
     wx.cloud.callFunction({

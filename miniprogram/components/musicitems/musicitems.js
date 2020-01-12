@@ -1,7 +1,16 @@
+const app = getApp()
 Component({
   properties: {
     musicList: {
       type: Array
+    }
+  },
+  pageLifetimes: {
+    show() {
+      this.setData({
+        playingId: app.getPlayMusicId()
+      })
+      // console.log('this.data.playingId', typeof this.data.playingId)
     }
   },
 
@@ -14,6 +23,7 @@ Component({
   methods: {
     onSelect(e) {
       const {musicid, index} = e.currentTarget.dataset
+      // console.log('musicId', typeof musicid)
       this.setData({
         playingId: musicid
       })
