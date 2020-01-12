@@ -1,6 +1,6 @@
-<scroll-view hidden="{{!isShowLrc}}" class="lyric-scroll">
+<scroll-view hidden="{{!isShowLrc}}" class="lyric-scroll" scroll-y scroll-top="{{scrollTop}}" scroll-with-animation>
   <view class="lyric-panel">
-    <view wx:for="{{lyricList}}" wx:key="index" class="lyric">
+    <view wx:for="{{lyricList}}" wx:key="index" class="lyric {{index === highlightIndex ? 'highlight-lyric' : ''}}">
       {{item.lrc}}
     </view>
   </view>

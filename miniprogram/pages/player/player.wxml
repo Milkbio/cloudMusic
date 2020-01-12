@@ -7,11 +7,11 @@
   </view>
 
   <!--歌词-->
-  <x-lrc isShowLrc="{{isShowLrc}}" bind:tap="handleShowLrc" lyric="{{lyric}}"/>
+  <x-lrc class="lyric" isShowLrc="{{isShowLrc}}" bind:tap="handleShowLrc" lyric="{{lyric}}"/>
 
   <!--进度条-->
   <view class="progress-bar">
-    <x-progressbar bind:musicEnd="next"/>
+    <x-progressbar bind:musicEnd="next" bind:timeUpdate="timeUpdate"/>
   </view>
 
 

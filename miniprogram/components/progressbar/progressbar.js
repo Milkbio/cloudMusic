@@ -64,6 +64,7 @@ Component({
         if (!isOnChanging) {
           // console.log(backgroundAudioManager.currentTime)
           const currentTime = backgroundAudioManager.currentTime
+          // console.log(currentTime)
           const totalTime = backgroundAudioManager.duration
           // 获取播放时间格式化后秒数
           const second = Math.floor(currentTime % 60)
@@ -75,6 +76,12 @@ Component({
               ['showTime.currentTime']: this.formatTime(currentTime),
               offsetX: (movableAreaWidth - movableViewWidth) * currentTime / totalTime,
               percent: currentTime / totalTime * 100
+            })
+
+            // 获取backgroundAudioManager.currentTime整数
+            const sec = Math.floor(currentTime)
+            this.triggerEvent('timeUpdate', {
+              currentTime
             })
           }
         }

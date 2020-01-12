@@ -99,6 +99,10 @@ Page({
       isShowLrc: !this.data.isShowLrc
     })
   },
+  // progressbar中timeUpdate触发事件
+  timeUpdate(e) {
+    this.selectComponent('.lyric').update(e.detail.currentTime)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

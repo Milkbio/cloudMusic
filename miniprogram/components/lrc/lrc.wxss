@@ -10,7 +10,8 @@
 }
 .lyric {
   min-height: 64rpx;
+  transition: color ease 1.3s;
 }
-.hightlight-lyric {
+.highlight-lyric {
   color: #d43c33;
 }
