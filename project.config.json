@@ -40,9 +40,9 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/player/player",
-					"pathName": "pages/player/player",
-					"query": "musicId= 66476&index=0",
+					"name": "1",
+					"pathName": "pages/blog/blog",
+					"query": "",
 					"scene": null
 				}
 			]

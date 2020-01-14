@@ -28,7 +28,10 @@ Page({
   onShow: function () {
 
   },
+  // 发布事件
+  publish() {
 
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
