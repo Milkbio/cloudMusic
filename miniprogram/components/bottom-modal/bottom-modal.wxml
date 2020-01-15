@@ -1,0 +1,6 @@
+<view class="modal" hidden="{{!isShowModal}}">
+  <view class="panel">
+    <i class="iconfont icon-shanchu"></i>
+    <slot name="content"></slot>
+  </view>
+</view>
