@@ -54,7 +54,7 @@ Page({
   authSuccess(e) {
     app.globalData.userInfo  = e.detail
     wx.navigateTo({
-      url: 'pages/publish/publish'
+      url: '/pages/publish/publish'
     })
   },
   authFail() {
