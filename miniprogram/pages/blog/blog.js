@@ -38,9 +38,8 @@ Page({
         if (setting['scope.userInfo']) {
           wx.getUserInfo({
             success: res => {
-              app.globalData.userInfo  = res.userInfo
-              wx.navigateTo({
-                url: '/pages/publish/publish'
+              this.authSuccess({
+                detail: res.userInfo
               })
             }
           })
